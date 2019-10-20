@@ -39,7 +39,7 @@
                     &nbsp;
                     &nbsp;
                     <p:outputLabel value="Marca : " for="somMarca" />
-                    <p:selectOneMenu id="somMarca" value="#{formulario.marca}" style="width:150px">
+                    <p:selectOneMenu id="somMarca" value="#{formulario.marca}" style="width:150px" required="true">
                     <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{formulario.marca}" var="marca" itemLabel="#{marca}" itemValue="#{marca}" />
                     </p:selectOneMenu>  
@@ -62,7 +62,11 @@
                  <p:calendar id="calendario" value="#{formulario.modelo}" pattern="yyyy" required="true" showWeek="true">
                      <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
                  </p:calendar>
-                 
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
                  <p:commandButton value="Agregar a la Lista" id="ajax" action="#{logica.agregarLista}" style="margin-right:20px;" styleClass="ui-priority-primary" />
                 </p:layoutUnit>
                   
