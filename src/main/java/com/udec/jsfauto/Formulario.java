@@ -5,12 +5,16 @@
  */
 package com.udec.jsfauto;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -31,7 +35,12 @@ public class Formulario {
         marca.add("Toyota");
     }
     
-    
+     public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Modelo seleccionado", format.format(event.getObject())));
+    }
+     
     public Formulario(String nombre, Date modelo,List<String> marca) {
         this.nombre = nombre;
         this.modelo = modelo;
