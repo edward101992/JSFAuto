@@ -26,9 +26,33 @@
                 </p:layoutUnit>
                         
                 <p:layoutUnit position="center">
-                    
-                    
-                    Welcome to PrimeFaces
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <p:outputLabel value="Marca : " for="somMarca" />
+                    <p:selectOneMenu id="somMarca" value="#{formulario.marca}" style="width:150px">
+                    <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{formulario.marca}" var="marca" itemLabel="#{marca}" itemValue="#{marca}" />
+                    </p:selectOneMenu>  
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <p:outputLabel for="nombre" value="Nombre :" />
+                    <p:inputText id="nombre" value="#{formulario.nombre}" required="true" label="Nombre">
+                    <f:validateLength minimum="2" />
+                    </p:inputText>    
+                    <p:message for="nombre" display="icon" />
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     <p:outputLabel for="nombre" value="Nombre :" />
+                     <p:inputText id="nombre" value="#{formulario.nombre}" required="true" label="Nombre">
+                     <f:validateLength minimum="2" />
+                     </p:inputText>    
+                     <p:message for="nombre" display="icon" />
                 </p:layoutUnit>
 
             </p:layout>
