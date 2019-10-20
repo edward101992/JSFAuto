@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>Auto JSF</title>
             </f:facet>
         </h:head>
 
@@ -17,15 +17,18 @@
             <h:form id="form">
                 
             <p:growl id="msgs" showDetail="true" />
+            
                     
               <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
+                    <h2>
+                    Concesionario
+                    </h2>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    Universidad Cundinamarca - Facatativa
                 </p:layoutUnit>
                         
                 <p:layoutUnit position="center">
@@ -56,11 +59,13 @@
                     &nbsp;
                     &nbsp;
                  <p:outputLabel for="calendario" value="Select Event:" />
-                 <p:calendar id="calendario" value="#{formulario.modelo}" pattern="yyyy">
+                 <p:calendar id="calendario" value="#{formulario.modelo}" pattern="yyyy" required="true" showWeek="true">
                      <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
                  </p:calendar>
+                 
+                 <p:commandButton value="Agregar a la Lista" id="ajax" action="#{logica.agregarLista}" style="margin-right:20px;" styleClass="ui-priority-primary" />
                 </p:layoutUnit>
-
+                  
             </p:layout>
             </h:form>
           

@@ -19,6 +19,10 @@ public class Logica {
     /**
      * Creates a new instance of Logica
      */
+    
+    public void agregarLista(){
+    
+    }
     public Logica() {
     }
     
