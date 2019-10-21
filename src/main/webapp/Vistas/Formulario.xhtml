@@ -70,35 +70,31 @@
                       
                         <br></br>
                         
-                        <p:dataTable   id="tabla" value="#{formulario.listaAutos}" var="aut" rendered="#{formulario.listaAutos.size()>0 eq true}">
+                        <p:dataTable paginator="true" rows="5"  widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="aut" rendered="#{formulario.listaAutos.size()>0 eq true}">
 
+                        
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <p:outputLabel value="Nombre" />
-                                </f:facet>
+                            <p:column headerText="Nombre" filterBy="#{aut.nombre}" filterStyle="width:100px;" filterMatchMode="contains" >
+                                
+                              
 
                                 <p:outputLabel  value="#{aut.nombre}"/>
 
-                            </p:column>
+                            </p:column  >
                             <br></br>
-                            <p:column>
-                                <f:facet name="header">
-                                    <p:outputLabel value="Marca" />
-                                </f:facet>
+                            <p:column headerText="Marca" filterBy="#{aut.marca}" filterStyle="width:100px;" filterMatchMode="contains">
+                              
                                 <br></br>
                                 <p:outputLabel for="tabla"    value="#{aut.marca}"/>
-                               
+
                             </p:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <p:outputLabel value="Fecha" />
-                                </f:facet>
-                                <br></br>
+                            <p:column headerText="Fecha" filterBy="#{aut.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
                              
+                                <br></br>
+
                                 <p:outputLabel value="#{aut.fecha}"/>
-                                
+
                             </p:column>
                             <br></br>
 
