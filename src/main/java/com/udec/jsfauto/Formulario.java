@@ -28,42 +28,61 @@ import org.primefaces.event.SelectEvent;
 @Named(value = "formulario")
 @RequestScoped
 public class Formulario implements Serializable{
-
+    
     private LogicaA autos = new LogicaA();
     private static List<LogicaA> listaAutos = new ArrayList();
-
+    /**
+     * Constructor del formulario
+     */
     public Formulario() {
     }
  
-
-    public LogicaA getLogicaA() {
-        return autos;
-    }
-
-    public void setLogicaA(LogicaA autos) {
-        this.autos = autos;
-    }
-
+ 
+    /**
+     *set variable listaAutos es la encargada de 
+     * tres la lista 
+     * @return listaAutos
+     */
     public List<LogicaA> getListaAutos() {
         return listaAutos;
     }
-
+    /**
+     * set variable listaAutos es la encargada de 
+     * enviar la lista
+     * @param listaAutos 
+     */
     public void setListaAutos(List<LogicaA> listaAutos) {
         Formulario.listaAutos = listaAutos;
     }
- 
+    /**
+     * Metodo encargado de agregar a la lista los 
+     * datos del Automovil
+     */
     public void agregarAutos(){
        
         Formulario.listaAutos.add(this.autos);
     }
-    
+       /**
+     * 
+     * @return autos
+     */
+    public LogicaA getLogicaA() {
+        return autos;
+    }
+    /**
+     * 
+     * @param autos 
+     */
+    public void setLogicaA(LogicaA autos) {
+        this.autos = autos;
+    }
     
     /**
      * Metodo que llena la lista marca
      */
   
     /**
-     * Metodo que muestra un mensaje con el añño que selecciono el usuario
+     * Metodo que muestra un mensaje con el año que selecciono el usuario
      * @param event variable que activa el mensaje
      */
      public void onDateSelect(SelectEvent event) {
