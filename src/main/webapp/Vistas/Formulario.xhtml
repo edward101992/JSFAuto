@@ -19,12 +19,10 @@
                 <p:growl id="msgs" showDetail="true" />
 
 
-                <p:layout fullPage="true">
+                <p:layout fullPage="true" style=" column-rule-color: indigo " >
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                        <h2>
-                            Concesionario
-                        </h2>
+                                                     <h1>CONCESIONARIO</h1>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
@@ -60,13 +58,13 @@
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <p:outputLabel for="calendario" value="Select Event:" />
+                        <p:outputLabel for="calendario" value="Modelo" />
                         <p:calendar id="calendario" value="#{formulario.logicaA.fecha}" pattern="yyyy" required="true" showWeek="true">
                             <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
                         </p:calendar>
                      
                         
-                        <p:commandButton ajax="false" value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="margin-right:20px;"  />
+                        <p:commandButton    ajax="false" value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="   margin-right:20px;"  />
                       
                         <br></br>
                         
@@ -93,9 +91,11 @@
                                 <p:outputLabel for="tabla"    value="#{aut.marca}"/>
 
                             </p:column>
-
-                            <p:column headerText="Fecha" filterBy="#{aut.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
-                             
+                            
+                            <br></br>
+                            
+                            <p:column  headerText="Modelo" filterBy="#{aut.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
+                              
                                 <br></br>
 
                                 <p:outputLabel value="#{aut.fecha}"/>
