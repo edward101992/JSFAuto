@@ -59,7 +59,7 @@ public class Formulario implements Serializable{
      * datos del Automovil
      */
     public void agregarAutos(){
-       
+      
         Formulario.listaAutos.add(this.autos);
     }
        /**
