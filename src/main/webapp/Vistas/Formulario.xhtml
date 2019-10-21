@@ -22,11 +22,11 @@
                 <p:layout fullPage="true" style=" column-rule-color: indigo " >
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                                                     <h1>CONCESIONARIO</h1>
+                        <h1 style="color: gold ">CONCESIONARIO</h1>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                        Universidad Cundinamarca - Facatativa
+                         Bienvenido  Universidad Cundinamarca - Facatativa  
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
@@ -62,13 +62,15 @@
                         <p:calendar id="calendario" value="#{formulario.logicaA.fecha}" pattern="yyyy" required="true" showWeek="true">
                             <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
                         </p:calendar>
-                     
                         
+                        <br>
+                            
+                        </br>
                         <p:commandButton    ajax="false" value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="   margin-right:20px;"  />
-                      
+                       <p:outputLabel style=" color: gold " value="Despues de ingresar cuatro autos se mostraran los datos"/>
                         <br></br>
                         
-                        <p:dataTable    paginator="true" rows="4"  widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="aut" rendered="#{formulario.listaAutos.size()>0 eq true}">
+                        <p:dataTable    paginator="true" rows="4"  widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="aut" rendered="#{formulario.listaAutos.size()>4 eq true}">
 
                              <f:facet name="header">
                                 
