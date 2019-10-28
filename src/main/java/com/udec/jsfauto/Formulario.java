@@ -11,12 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 import org.primefaces.event.SelectEvent;
 
@@ -28,71 +30,108 @@ import org.primefaces.event.SelectEvent;
 @Named(value = "formulario")
 @RequestScoped
 public class Formulario implements Serializable{
-    
+   
     private LogicaA autos = new LogicaA();
     private static List<LogicaA> listaAutos = new ArrayList();
-    /**
-     * Constructor del formulario
-     */
+     private String nombre;
+    private String marca;
+    private Date fecha;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    
+    public LogicaA getAutos() {
+        return autos;
+    }
+
+    public void setAutos(LogicaA autos) {
+        this.autos = autos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
+    
     public Formulario() {
     }
  
- 
-    /**
-     *set variable listaAutos es la encargada de 
-     * tres la lista 
-     * @return listaAutos
-     */
-    public List<LogicaA> getListaAutos() {
-        return listaAutos;
-    }
-    /**
-     * set variable listaAutos es la encargada de 
-     * enviar la lista
-     * @param listaAutos 
-     */
-    public void setListaAutos(List<LogicaA> listaAutos) {
-        Formulario.listaAutos = listaAutos;
-    }
-    /**
-     * Metodo encargado de agregar a la lista los 
-     * datos del Automovil
-     */
-    public void agregarAutos(){
-      
-        Formulario.listaAutos.add(this.autos);
-    }
-       /**
-     * 
-     * @return autos
-     */
+
     public LogicaA getLogicaA() {
         return autos;
     }
-    /**
-     * 
-     * @param autos 
-     */
+
     public void setLogicaA(LogicaA autos) {
         this.autos = autos;
     }
+
+    public List<LogicaA> getListaAutos() {
+        return listaAutos;
+    }
+
+    public void setListaAutos(List<LogicaA> listaAutos) {
+        Formulario.listaAutos = listaAutos;
+    }
+ 
+    public void agregarAutos(){
+       
+        Formulario.listaAutos.add(this.autos);
+    }
+      public void cancelar(RowEditEvent event) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cancelado"));
+    }
+   public void eliminarAutos(LogicaA au){
     
-    /**
-     * Metodo que llena la lista marca
-     */
+        listaAutos.remove(au);
+    }
+   public void actualizar(RowEditEvent event) {
+        LogicaA carroactualizar = (LogicaA) event.getObject();
+        if (nombre != "") {
+            carroactualizar.setNombre(nombre);
+        }
+        if (marca != "") {
+            carroactualizar.setMarca(marca);
+        }
+       
+       
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Actualizado"));
+
+    }
+   
+  
+  
   
     /**
-     * Metodo que muestra un mensaje con el año que selecciono el usuario
+     * Metodo que muestra un mensaje con el añño que selecciono el usuario
      * @param event variable que activa el mensaje
      */
      public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        
+      
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Modelo seleccionado", format.format(event.getObject())));
     }
-     /**
-    * Constructor de la clase Formulario
-    */
+     
+ 
+  
    
    
    

@@ -3,7 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
@@ -14,22 +14,29 @@
         </h:head>
 
         <h:body>
+             <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
             <h:form id="form">
 
                 <p:growl id="msgs" showDetail="true" />
 
 
-                <p:layout fullPage="true" style=" column-rule-color: indigo " >
+                <p:layout fullPage="true">
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                        <h1 style="color: gold ">CONCESIONARIO</h1>
+                        <h1 style="color: gold " >
+                            Concesionario
+                        </h1>
                     </p:layoutUnit>
 
                     <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                         Bienvenido  Universidad Cundinamarca - Facatativa  
+                        Universidad Cundinamarca - Facatativa
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
+
+
                         &nbsp;
                         &nbsp;
                         &nbsp;
@@ -43,6 +50,10 @@
                             <f:selectItem itemValue = "Hyundai" itemLabel = "Hyundai" /> 
                             <f:selectItem itemValue = "Chevrolet" itemLabel = "Chevrolet" /> 
                         </p:selectOneMenu> 
+
+
+
+
                         &nbsp;
                         &nbsp;
                         &nbsp;
@@ -52,6 +63,7 @@
                         </p:inputText>    
                         <p:message for="nombre" display="icon" />
                         <br></br>
+    <br></br>
                         &nbsp;
                         &nbsp;
                         &nbsp;
@@ -61,47 +73,72 @@
                         <p:outputLabel for="calendario" value="Modelo" />
                         <p:calendar id="calendario" value="#{formulario.logicaA.fecha}" pattern="yyyy" required="true" showWeek="true">
                             <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
-                        </p:calendar>
-                        
-                        <br>
                             
-                        </br>
-                        <p:commandButton    ajax="false" value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="   margin-right:20px;"  />
-                       <p:outputLabel style=" color: gold " value="Despues de ingresar cuatro autos se mostraran los datos"/>
-                        <br></br>
-                        
-                        <p:dataTable    paginator="true" rows="4"  widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="aut" rendered="#{formulario.listaAutos.size()>4 eq true}">
+                        </p:calendar>
+                     
 
-                             <f:facet name="header">
-                                
+
+                        <p:commandButton   value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="margin-right:20px;">
+
+                            <f:ajax render=":form:tabla"/>
+                        </p:commandButton>
+
+                         <h:panelGroup id="paneltabla">
+                             <p:dataTable  editable="true" paginator="true" rows="5"   widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="autos" >
+                           <p:ajax event="rowEdit" listener="#{formulario.actualizar}" update="tabla"/>
+                           <p:ajax event="rowEditCancel" listener="#{carroBean.cancelar}" update="tabla"/>
+                            <f:facet name="header">
+
                                 <h:outputText value="Buscar"/>
-                                <p:inputText id="globalFilter" onkeyup="PF('dataTableWidgetVar').filter() " style="width: 150px " placeholder="Ingrese Busqueda"/>
-                                
+                                <p:inputText id="globalFilter" onkeyup="PF('dataTableWidgetVar').filter()" style="width: 150px " placeholder="Ingrese Busqueda"/>
+
                             </f:facet>
 
-                            <p:column headerText="Nombre" filterBy="#{aut.nombre}" filterStyle="width:100px;" filterMatchMode="contains" >
-                                
-                              
 
-                                <p:outputLabel  value="#{aut.nombre}"/>
 
-                            </p:column  >
-                            <br></br>
-                            <p:column headerText="Marca" filterBy="#{aut.marca}" filterStyle="width:100px;" filterMatchMode="contains">
-                              
-                                <br></br>
-                                <p:outputLabel for="tabla"    value="#{aut.marca}"/>
-
+                            <p:column>
+                                <p:commandButton   value="Eliminar" actionListener="#{formulario.eliminarAutos(autos)}">
+                                <f:ajax render=":form:tabla"/>
+                                </p:commandButton>
                             </p:column>
+
                             
+                           
                             <br></br>
-                            
-                            <p:column  headerText="Modelo" filterBy="#{aut.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
+                           <p:column headerText="Nombre"  filterBy="#{autos.nombre}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{autos.nombre}"/>
+
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{formulario.nombre}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+
+                                </p:column>
+                              <p:column headerText="Marca" filterBy="#{autos.marca}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{autos.marca}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:selectOneMenu  value="#{formulario.marca}">
+                                                <f:selectItems value="#{formulario.marca}" />
+                                            </p:selectOneMenu>
+
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                     <p:column  headerText="Modelo" filterBy="#{autos.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
                               
                                 <br></br>
 
-                                <p:outputLabel value="#{aut.fecha}"/>
-
+                                <p:outputLabel  value="#{autos.fecha}">
+                                
+                                </p:outputLabel>
+                                
                             </p:column>
                             <br></br>
 
@@ -109,25 +146,19 @@
 
 
                         </p:dataTable>
-                      
-                        <p:subTable value="#{formulario.listaAutos}" >
-                          <p:outputLabel style=" color: chartreuse " value="#{aut.nombre}"/>
-                        
-                        </p:subTable>
- 
-                        
-                        
+                        </h:panelGroup>
                     </p:layoutUnit>
-          
-                    
-                </p:layout>
-            
-            
-            </h:form>
 
+
+                </p:layout>
+
+
+            </h:form>
+                  </div>
+                <div class="col-sm-4"></div>
+            </div>
 
         </h:body>
 
     </f:view>
 </html>
-
