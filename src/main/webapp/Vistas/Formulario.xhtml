@@ -14,147 +14,152 @@
         </h:head>
 
         <h:body>
-             <div class="row">
+            <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-            <h:form id="form">
+                    <h:form id="form">
 
-                <p:growl id="msgs" showDetail="true" />
-
-
-                <p:layout fullPage="true">
-
-                    <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                        <h1 style="color: gold " >
-                            Concesionario
-                        </h1>
-                    </p:layoutUnit>
-
-                    <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                        Universidad Cundinamarca - Facatativa
-                    </p:layoutUnit>
-
-                    <p:layoutUnit position="center">
+                        <p:growl id="msgs" showDetail="true" />
 
 
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <h:outputLabel  style=" color: black    " value="Marca"/>
-                        <p:selectOneMenu  value = "#{formulario.logicaA.marca}"> 
-                            <f:selectItem itemValue = "Toyota" itemLabel = "Toyota" /> 
-                            <f:selectItem itemValue = "Ford" itemLabel = "Ford" /> 
-                            <f:selectItem itemValue = "Hyundai" itemLabel = "Hyundai" /> 
-                            <f:selectItem itemValue = "Chevrolet" itemLabel = "Chevrolet" /> 
-                        </p:selectOneMenu> 
+                        <p:layout fullPage="true">
+
+                            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                                <h1 style="color: gold " >
+                                    Concesionario
+                                </h1>
+                            </p:layoutUnit>
+
+                            <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                                Universidad Cundinamarca - Facatativa
+                            </p:layoutUnit>
+
+                            <p:layoutUnit position="center">
 
 
-
-
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <p:outputLabel for="nombre" value="Nombre :" />
-                        <p:inputText id="nombre" value="#{formulario.logicaA.nombre}" required="true" label="Nombre">
-                            <f:validateLength minimum="2" />
-                        </p:inputText>    
-                        <p:message for="nombre" display="icon" />
-                        <br></br>
-    <br></br>
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <p:outputLabel for="calendario" value="Modelo" />
-                        <p:calendar id="calendario" value="#{formulario.logicaA.fecha}" pattern="yyyy" required="true" showWeek="true">
-                            <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
-                            
-                        </p:calendar>
-                     
-
-
-                        <p:commandButton   value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="margin-right:20px;">
-
-                            <f:ajax render=":form:tabla"/>
-                        </p:commandButton>
-
-                         <h:panelGroup id="paneltabla">
-                             <p:dataTable  editable="true" paginator="true" rows="5"   widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="autos" >
-                           <p:ajax event="rowEdit" listener="#{formulario.actualizar}" update="tabla"/>
-                           <p:ajax event="rowEditCancel" listener="#{carroBean.cancelar}" update="tabla"/>
-                            <f:facet name="header">
-
-                                <h:outputText value="Buscar"/>
-                                <p:inputText id="globalFilter" onkeyup="PF('dataTableWidgetVar').filter()" style="width: 150px " placeholder="Ingrese Busqueda"/>
-
-                            </f:facet>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <h:outputLabel  style=" color: black    " value="Marca"/>
+                                <p:selectOneMenu  value = "#{formulario.logicaA.marca}"> 
+                                    <f:selectItem itemValue = "Toyota" itemLabel = "Toyota" /> 
+                                    <f:selectItem itemValue = "Ford" itemLabel = "Ford" /> 
+                                    <f:selectItem itemValue = "Hyundai" itemLabel = "Hyundai" /> 
+                                    <f:selectItem itemValue = "Chevrolet" itemLabel = "Chevrolet" /> 
+                                </p:selectOneMenu> 
 
 
 
-                            <p:column>
-                                <p:commandButton   value="Eliminar" actionListener="#{formulario.eliminarAutos(autos)}">
-                                <f:ajax render=":form:tabla"/>
-                                </p:commandButton>
-                            </p:column>
 
-                            
-                           
-                            <br></br>
-                           <p:column headerText="Nombre"  filterBy="#{autos.nombre}" filterMatchMode="contains">
-                                    <p:cellEditor>
-                                        <f:facet name="output">
-                                            <h:outputText value="#{autos.nombre}"/>
-
-                                        </f:facet>
-                                        <f:facet name="input">
-                                            <h:inputText value="#{formulario.nombre}"/>
-                                        </f:facet>
-                                    </p:cellEditor>
-
-                                </p:column>
-                              <p:column headerText="Marca" filterBy="#{autos.marca}" filterMatchMode="contains">
-                                    <p:cellEditor>
-                                        <f:facet name="output">
-                                            <h:outputText value="#{autos.marca}" />
-                                        </f:facet>
-                                        <f:facet name="input">
-                                            <p:selectOneMenu  value="#{formulario.marca}">
-                                                <f:selectItems value="#{formulario.marca}" />
-                                            </p:selectOneMenu>
-
-                                        </f:facet>
-                                    </p:cellEditor>
-                                </p:column>
-
-                     <p:column  headerText="Modelo" filterBy="#{autos.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
-                              
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <p:outputLabel for="nombre" value="Nombre :" />
+                                <p:inputText id="nombre" value="#{formulario.logicaA.nombre}" required="true" label="Nombre">
+                                    <f:validateLength minimum="2" />
+                                </p:inputText>    
+                                <p:message for="nombre" display="icon" />
                                 <br></br>
+                                <br></br>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <p:outputLabel for="calendario" value="Modelo" />
+                                <p:calendar id="calendario" value="#{formulario.logicaA.fecha}" pattern="yyyy" required="true" showWeek="true">
+                                    <p:ajax event="dateSelect" listener="#{formulario.onDateSelect}" update="msgs" />
 
-                                <p:outputLabel  value="#{autos.fecha}">
-                                
-                                </p:outputLabel>
-                                
-                            </p:column>
-                            <br></br>
-
-                            <br></br>
-
-
-                        </p:dataTable>
-                        </h:panelGroup>
-                    </p:layoutUnit>
+                                </p:calendar>
 
 
-                </p:layout>
+
+                                <p:commandButton   value="Agregar a la Lista" actionListener="#{formulario.agregarAutos}" style="margin-right:20px;">
+
+                                    <f:ajax render=":form:tabla"/>
+                                </p:commandButton>
+
+                                <h:panelGroup id="paneltabla">
+                                    <p:dataTable  editable="true" paginator="true" rows="5"   widgetVar="dataTableWidgetVar"   id="tabla" value="#{formulario.listaAutos}" var="autos" >
+                                        <p:ajax event="rowEdit" listener="#{formulario.actualizar}" update="tabla"/>
+                                        <p:ajax event="rowEditCancel" listener="#{carroBean.cancelar}" update="tabla"/>
+                                        <f:facet name="header">
+
+                                            <h:outputText value="Buscar"/>
+                                            <p:inputText id="globalFilter" onkeyup="PF('dataTableWidgetVar').filter()" style="width: 150px " placeholder="Ingrese Busqueda"/>
+
+                                        </f:facet>
+                                        <p:column>
+                                            <p:rowEditor/>
+                                        </p:column>
 
 
-            </h:form>
-                  </div>
+                                        <p:column>
+                                            <p:commandButton   value="Eliminar" actionListener="#{formulario.eliminarAutos(autos)}">
+                                                <f:ajax render=":form:tabla"/>
+                                            </p:commandButton>
+                                        </p:column>
+
+
+
+                                        <br></br>
+                                        <p:column headerText="Nombre"  filterBy="#{autos.nombre}" filterMatchMode="contains">
+                                            <p:cellEditor>
+                                                <f:facet name="output">
+                                                    <h:outputText value="#{autos.nombre}"/>
+
+                                                </f:facet>
+                                                <f:facet name="input">
+                                                    <h:inputText value="#{formulario.nombre}"/>
+                                                </f:facet>
+                                            </p:cellEditor>
+
+                                        </p:column>
+                                        <p:column headerText="Marca" filterBy="#{autos.marca}" filterMatchMode="contains">
+                                            <p:cellEditor>
+                                                <f:facet name="output">
+                                                    <h:outputText value="#{autos.marca}" />
+                                                </f:facet>
+                                                <f:facet name="input">
+                                                    <p:selectOneMenu  value="#{formulario.marca}">
+                                                        <f:selectItem itemValue = "Toyota" itemLabel = "Toyota" /> 
+                                                        <f:selectItem itemValue = "Ford" itemLabel = "Ford" /> 
+                                                        <f:selectItem itemValue = "Hyundai" itemLabel = "Hyundai" /> 
+                                                        <f:selectItem itemValue = "Chevrolet" itemLabel = "Chevrolet" /> 
+                                                    </p:selectOneMenu>
+
+                                                </f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+
+                                        <p:column  headerText="Modelo" filterBy="#{autos.fecha}" filterStyle="width:100px;" filterMatchMode="contains">
+
+                                            <br></br>
+
+                                            <p:outputLabel  value="#{autos.fecha}">
+                                            <f:convertDateTime pattern="yyyy" dateStyle="type"/>
+                                            </p:outputLabel>
+
+                                        </p:column>
+                                        <br></br>
+
+                                        <br></br>
+
+
+                                    </p:dataTable>
+                                </h:panelGroup>
+                            </p:layoutUnit>
+
+
+                        </p:layout>
+
+
+                    </h:form>
+                </div>
                 <div class="col-sm-4"></div>
             </div>
 
